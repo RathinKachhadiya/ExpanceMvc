@@ -1,0 +1,57 @@
+﻿@model ExpanceMvc.Models.category
+
+@{
+    ViewBag.Title = "Add Category";
+}
+
+<div class="main-wrapper">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add Category</h5>
+                @using (Html.BeginForm())
+                {
+                    <div class="row mb-3">
+                        @Html.HiddenFor(model => model.catid)
+                        <label for="categoryname" class="col-sm-2 col-form-label">Category Name</label>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.catname, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control",
+                                    @name = "catname",
+                                    @placeholder = "Enter Category Name"
+                                }
+                            })
+                            <span asp-validation-for="catname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="categoryexplimit" class="col-sm-2 col-form-label">Category Expance Limit </label>
+                        <div class="col-sm-10">
+
+                            @Html.EditorFor(model => model.catexplim, new
+                            {
+                               htmlAttributes = new
+                                {
+                                   @class = "form-control",
+                                   @min = "1",
+                                   @oninput = "validity.valid||(value='');",
+                                   @name = "catexplim",
+                                   @placeholder = "Enter Category Expance Limit"
+                                }
+                           })
+                            <span asp-validation-for="catexplim" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add Category</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

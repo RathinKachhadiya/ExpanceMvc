@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ExpanceMvc.Models.expance>
+
+@{
+    ViewBag.Title = "Expances";
+}
+
+
+
+<p>
+    <a href="@Url.Action("AddOrEdit","expances")" class="btn btn-success"><i class="fas fa-plus"></i>Create New</a>
+</p>
+
+
+<div class="card card-bg">
+    <div class="card-body">
+        <h5 class="card-title">Expance List</h5>
+        <div class=table-responsive>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.expid)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.exptitle)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.expdescription)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.expcategory)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.expamount)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.catid)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.expdatetime)
+                        </th>
+                        <th scope="col">Edit | Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.expid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.exptitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.expdescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.expcategory)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.expamount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.catid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.expdatetime)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("AddOrEdit","expances", new{ id = item.expid})" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                @*<a href="@Url.Action("Delete","expances", new{ id = item.expid})" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i>Edit</a>*@
+                                <a onclick="Delete(@item.expid)" class="btn btn-secondary"><i class="fas fa-trash-alt"></i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != ''){
+                alertify.success(successMessage);
+            }
+            });
+        function Delete(id) {
+            alertify.confirm('Expance Delete Opration', 'Are You Sure To Delete This Expance ? ', function () {
+                window.location.href = '@Url.Action("Delete","expances")/' + id;
+            }, null);
+        }
+    </script>
+}

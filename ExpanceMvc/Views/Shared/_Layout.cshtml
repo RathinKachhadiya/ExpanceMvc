@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Admin Dashboard Template">
+    <meta name="keywords" content="admin,dashboard">
+    <meta name="author" content="stacks">
+    <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>@ViewData["Title"] - Expance Tracker</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/assets/plugins/pace/pace.css" rel="stylesheet" />
+    <link href="~/assets/plugins/apexcharts/apexcharts.css" rel="stylesheet" />
+
+    <link href="~/Content/alertifyjs/themes/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <!-- Theme Styles -->
+    <link href="~/assets/css/main.min.css" rel="stylesheet" />
+    <link href="~/assets/css/custom.css" rel="stylesheet" />
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+</head>
+<body class="">
+    <div class="page-container">
+        <div class="page-sidebar">
+            <a class="logo" asp-controller="Home" asp-action="Index">Expance Tracker</a>
+            <ul class="list-unstyled accordion-menu">
+                <li class="active-page">
+                    <a href="#"><i data-feather="activity"></i>Dashboard<i class="fas fa-chevron-right dropdown-icon"></i></a>
+                    <ul class="">
+                        <li align="center">@Html.ActionLink("Dashboard", "Index", "Home")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">category</i>Category<i class="fas fa-chevron-right dropdown-icon"></i></a>
+                    <ul class="">
+                        <li>
+                        <li align="center">@Html.ActionLink("Add Category", "AddOrEdit", "categories")</li>
+                        <li align="center">@Html.ActionLink("View Category", "Index", "categories")</li>
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">paid</i>Expance<i class="fas fa-chevron-right dropdown-icon"></i></a>
+                    <ul class="">
+                        <li align="center">@Html.ActionLink("Add Expance", "AddOrEdit", "expances")</li>
+                        <li>@Html.ActionLink("View Expance", "Index", "expances")</li>
+                        <li>@Html.ActionLink("View Total Expances", "Index", "totalexpances")</li>
+                    </ul>
+
+                </li>
+            </ul>
+            <a href="#" id="sidebar-collapsed-toggle"><i data-feather="arrow-right"></i></a>
+        </div>
+        <div class="page-content">
+            <header class="page-header">
+                <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+                    <div class="header-title flex-fill">
+                        <a href="#" id="sidebar-toggle"><i data-feather="arrow-left"></i></a>
+                        <h5>Dashboard</h5>
+                    </div>
+                </nav>
+            </header>
+            <div class="main-wrapper">
+                <div class="row">
+
+                    @RenderBody()
+
+                    <div class="col">
+                        <footer class="page-footer">
+                            <a href="#" class="page-footer-item page-footer-item-left">Designed by Rathin Kachhadiya</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascripts -->
+    <script src="~/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
+
+     <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+    <script src="~/assets/plugins/pace/pace.min.js"></script>
+
+   @* <script type="text/javascript" src="~/assets/js/custom.js"></script>*@
+    <script type="text/javascript" src="~/assets/js/pages/feathericons.js"></script>
+
+    <script src="~/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/assets/js/main.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/alertify.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

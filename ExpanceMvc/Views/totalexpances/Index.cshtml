@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ExpanceMvc.Models.totalexpances>
+
+@{
+    ViewData["Title"] = "Total Expance";
+}
+
+<div class="card card-bg">
+    <div class="card-body">
+        <h5 class="card-title"> Total Expance </h5>
+        <div class=table-responsive>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.totexpid)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.totexp)
+                        </th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totexpid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totexp)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("AddOrEdit","totalexpances", new{ id = item.totexpid})" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i>Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != ''){
+                alertify.success(successMessage);
+            }
+            });
+        
+    </script>
+}
+

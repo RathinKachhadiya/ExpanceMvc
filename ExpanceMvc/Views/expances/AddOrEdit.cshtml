@@ -1,0 +1,112 @@
+﻿@model ExpanceMvc.Models.expance
+
+@{
+    ViewBag.Title = "Add Or Edit Expance";
+}
+
+
+
+
+<div class="main-wrapper">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add Expance</h5>
+                @using (Html.BeginForm())
+                {
+                    <div class="row mb-3">
+                        @Html.HiddenFor(model => model.expid)
+                        <label for="expancetitle" class="col-sm-2 col-form-label">Expance Title</label>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.exptitle, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control",
+                               @name = "exptitle",
+                               @placeholder = "Enter Expance Title"
+                           }
+                       })
+                            <span asp-validation-for="exptitle" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="expancedescription" class="col-sm-2 col-form-label">Expance Description</label>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.expdescription, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control",
+                               @name = "expdescription",
+                               @placeholder = "Enter Expance Description"
+                           }
+                       })
+                            <span asp-validation-for="expdescription" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label for="expancecategory" class="col-sm-2 col-form-label">Expance Categroy</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(model => model.expcategory, new SelectList(ViewBag.data, "catname", "catname"), "Select your Category", new { @class = "form-control" })
+                            <span asp-validation-for="expcategory" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="expanceamount" class="col-sm-2 col-form-label">Expance Amount </label>
+                        <div class="col-sm-10">
+
+                            @Html.EditorFor(model => model.expamount, new
+                            {
+                        htmlAttributes = new
+                                {
+                        @class = "form-control",
+                        @min = "1",
+                        @oninput = "validity.valid||(value='');",
+                        @name = "expamount",
+                        @placeholder = "Enter Expance Amount"
+                                }
+                        })
+                            <span asp-validation-for="expamount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="catid" class="col-sm-2 col-form-label">Category Id </label>
+                        <div class="col-sm-10">
+                           
+                            @Html.DropDownListFor(model => model.catid, new SelectList(ViewBag.data, "catid", "catname","catid"), "Select your Category", new { @class = "form-control" })
+                            <span asp-validation-for="catid" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="expancedatetime" class="col-sm-2 col-form-label">Expance Datetime</label>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.expdatetime, new
+                            {
+                        htmlAttributes = new
+                                {
+                        @class = "form-control",
+                        @name = "expdatetime",
+                        @placeholder = "Enter Expance Date Time"
+                                }
+                        })
+                            <span asp-validation-for="expdatetime" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Add Expance</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,0 +1,20 @@
+/* Write your custom CSS here */
+/* Write your custom CSS here */
+.btn {
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.btn-edit {
+    color: blue;
+}
+
+.btn-delete {
+    color: red;
+}
+
+.btn-add {
+    color: rgba(106,195,167,255);
+}
+

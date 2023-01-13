@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="stats-info">
+                    <h5 class="card-title">
+                        @foreach (var totexp in ViewBag.totalexpances)
+                        {
+                            @totexp.totexp
+                        }<span class="stats-change stats-change-success"></span>
+                    </h5>
+                    <p class="stats-text">Total Expance Limit</p>
+                </div>
+                <div class="stats-icon change-success">
+                    <i class="material-icons">currency_rupee</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="stats-info">
+                    <h5 class="card-title"> @ViewBag.kj<span class="stats-change stats-change-success"></span></h5>
+                    <p class="stats-text">Total Expance</p>
+                </div>
+                <div class="stats-icon change-danger">
+                    <i class="material-icons">
+                        report_problem
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- category table -->
+    <div class="col">
+        <div class="card card-bg">
+            <div class="card-body">
+                <h5 class="card-title"> Category List </h5>
+                <table class="table" id="category">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Expance Limit</th>
+                            <th scope="col">select/Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cat in ViewBag.categories)
+                        {
+                            <tr class="table-primary">
+                                <td>@cat.catid</td>
+                                <td>@cat.catname </td>
+                                <td>@cat.catexplim</td>
+                                <td>
+                                    <button type="button" class=" btn material-icons">visibility</button>
+                                    @* <button type="button" class="btn btn-edit material-icons">edit</button>*@
+                                    <a href="@Url.Action("AddOrEdit","categories", new{ id = cat.catid})" class="btn btn-edit material-icons"><i class="fas fa-pencil-alt"></i></a>
+                                    <a onclick="Delete(@cat.catid)",  class="btn  btn-delete material-icons"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Expance Table -->
+    <div class="col">
+        <div class="card card-bg">
+            <div class="card-body">
+                <h5 class="card-title">Expance List</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Category Id</th>
+                            <th scope="col">Date Time</th>
+                            <th scope="col">Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var exp in ViewBag.expances)
+                        {
+                            <tr class="table-primary">
+                                <td>@exp.expid</td>
+                                <td>@exp.exptitle</td>
+                                <td>@exp.expdescription</td>
+                                <td>@exp.expcategory</td>
+                                <td>@exp.expamount</td>
+                                <td>@exp.catid</td>
+                                <td>@exp.expdatetime</td>
+                                <td>
+                                    <a href="@Url.Action("AddOrEdit","expances", new{ id = exp.expid})" class="btn btn-edit material-icons"><i class="fas fa-pencil-alt"></i></a>
+                                    <a onclick="Delete1(@exp.expid)", class="btn btn-delete material-icons"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != ''){
+                alertify.success(successMessage);
+            }
+            });
+        function Delete(id) {
+            alertify.confirm('Category Delete Opration', 'Are You Sure To Delete This Category ? ', function () {
+                window.location.href = '@Url.Action("Delete","categories")/' + id;
+            }, null);
+        }
+
+         function Delete1(id) {
+            alertify.confirm('Expance Delete Opration', 'Are You Sure To Delete This Expance ? ', function () {
+                window.location.href = '@Url.Action("Delete","expances")/' + id;
+            }, null);
+        }
+</script>
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ExpanceMvc.Models.category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+
+<p>
+    <a href="@Url.Action("AddOrEdit","categories")" class="btn btn-success"><i class="fas fa-plus"></i>Create New</a>
+</p>
+
+
+<div class="card card-bg">
+    <div class="card-body">
+        <h5 class="card-title"> Category List </h5>
+        <div class=table-responsive>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.catid)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.catname)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.catexplim)
+                        </th>
+                        <th scope="col">Edit | Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.catid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.catname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.catexplim)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("AddOrEdit","categories", new{ id = item.catid})" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                <a onclick="Delete(@item.catid)" class="btn btn-secondary"><i class="fas fa-trash-alt"></i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != ''){ 
+                alertify.success(successMessage);
+            }
+            });
+        function Delete(id) {
+            alertify.confirm('Category Delete Opration', 'Are You Sure To Delete This Category ? ',function () {
+                window.location.href = '@Url.Action("Delete","categories")/' + id;
+            },null );
+        }
+    </script>
+}
